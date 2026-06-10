@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TEC SYSTEM BOOT</title>
 
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: #39ff14;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+/* CRT scanlines */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,255,0,0.05),
+    rgba(0,255,0,0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+/* flicker */
+@keyframes flicker {
+  0% { opacity: 0.92; }
+  50% { opacity: 1; }
+  100% { opacity: 0.88; }
+}
+
+.screen {
+  padding: 20px;
+  animation: flicker 0.12s infinite;
+}
+
+.glow {
+  text-shadow: 0 0 6px #39ff14;
+}
+
+#menu {
+  display: none;
+  margin-top: 30px;
+}
+
+a {
+  display: block;
+  width: 260px;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #39ff14;
+  color: #39ff14;
+  text-decoration: none;
+}
+
+a:hover {
+  background: #39ff14;
+  color: black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+<h2 class="glow">TEC SYSTEM BOOT SEQUENCE</h2>
+
+<pre id="output"></pre>
+
+<div id="menu">
+  <h3 class="glow">SYSTEM ONLINE</h3>
+  <a href="overview.html">DATABASE OVERVIEW</a>
+  <a href="security.html">SECURITY LOGS</a>
+  <a href="entities.html">ENTITY INDEX</a>
+  <a href="files/tz001.html">FILE: TZ-001</a>
+  <a href="files/tz014.html">FILE: TZ-014</a>
+  <a href="files/deep-log.html">DEEP ACCESS LOG</a>
+</div>
+
+</div>
+
+<script>
+const lines = [
+  "Initializing TEC core systems...",
+  "Loading encryption layer [OK]",
+  "Mounting database nodes...",
+  "Checking security clearance...",
+  "WARNING: Minor instability in deep layer",
+  "Calibrating interface...",
+  "Establishing connection to TZPSS network...",
+  "System integrity: 98%",
+  "Finalizing boot sequence...",
+  "ACCESS GRANTED"
+];
+
+let i = 0;
+let output = document.getElementById("output");
+
+function typeLine() {
+  if (i < lines.length) {
+    output.innerHTML += lines[i] + "\n";
+    i++;
+    setTimeout(typeLine, 700); // speed of boot text
+  } else {
+    document.getElementById("menu").style.display = "block";
+  }
+}
+
+typeLine();
+</script>
+
+</body>
+</html>
