@@ -91,6 +91,7 @@ body.red-alert #apex-lock input:focus {
   box-shadow: 0 0 6px #ff2b2b;
 }
   
+  <div id="alertOverlay"></div>
 /* flicker */
 @keyframes flicker {
   0% { opacity: 0.92; }
@@ -147,6 +148,26 @@ body.red-alert #apex-lock input:focus {
 }
   #apex-lock button:active {
   transform: scale(0.95);
+}
+  #alertFlash {
+  position: fixed;
+  inset: 0;
+  background: red;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+  body.red-alert {
+  filter: contrast(1.3) saturate(1.2);
+}
+  @keyframes redFlash {
+  0%   { opacity: 0; }
+  10%  { opacity: 0.6; }
+  20%  { opacity: 0; }
+  40%  { opacity: 0.4; }
+  60%  { opacity: 0; }
+  80%  { opacity: 0.3; }
+  100% { opacity: 0; }
 }
   
 /* apps */
@@ -222,7 +243,17 @@ body.red-alert #apex-lock input:focus {
   <div id="entities" class="window">
     <div class="title">ENTITY INDEX</div>
     <p>Entity Catalog Available.</p>
-    <p>Records classified by threat level.</p>
+    <p>Bacteria - Highly aggressive entity.  
+      Can be countered but with great difficulty.</p>
+    <p>Hounds - Highly aggressive but can be scared off.
+    Tends to only attack line wanderers as they are physically
+    fragile.</p>
+    <p>Semi-Bacteria - Highly aggressive but lesser than Bacteria.
+    Smaller and/or deformed versions of their precursors.</p>
+    <p>Bacteria are among the most difficult to handle due to
+    their mysterious properties and physical strength.</p>
+    <p>Hounds tend to be relatively easy to deter as long as
+    there are multiple people.  Or a highly skilled individual.</p>
   </div>
 
   <div id="tz056" class="window">
@@ -328,14 +359,13 @@ function checkCode() {
   const code = document.getElementById("codeInput").value;
 
   if (code === "9k256m20s1516") {
-    document.getElementById("apex-unlocked").style.display = "block";
-    document.getElementById("apex-lock").style.display = "none";
+  document.getElementById("apex-unlocked").style.display = "block";
+  document.getElementById("apex-lock").style.display = "none";
 
-    // 🔴 ENTER RED ALERT MODE
-    document.body.classList.add("red-alert");
+  document.body.classList.add("red-alert");
 
-  } else {
-    alert("ACCESS DENIED");
+  document.getElementById("alertFlash").style.animation =
+    "redFlash 0.6s infinite";
   }
 }
 
