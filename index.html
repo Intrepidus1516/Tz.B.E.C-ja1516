@@ -82,11 +82,14 @@ body::before {
 
 #cursor {
   animation: blink 1s infinite;
+  display: inline-block;
+  margin-left: 2px;
 }
 
 #menu {
   display: none;
   margin-top: 30px;
+  animation: flicker 0.4s linear;
 }
  
 a {
@@ -113,6 +116,7 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
 </h2>
 <pre id="output"></pre>
 <span id="cursor">█</span>
+
 <div id="menu">
   <h3 class="glow">SYSTEM ONLINE</h3>
 
@@ -204,7 +208,7 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
 
   <p>Status: ACTIVE</p>
 
-  <p>Clearance Level Required: 4</p>
+  <p>Clearance Level Required: 5</p>
 
   <p>Notes: Data partially corrupted.</p>
 
@@ -218,7 +222,7 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
 
   <p>Status: INACTIVE</p>
 
-  <p>Clearance Level Required: 2</p>
+  <p>Clearance Level Required: 8</p>
 
   <p>Notes: ████████████████████.</p>
 
@@ -231,12 +235,21 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
   </div>
 
   <p>Classification: RESTRICTED</p>
-
   <p>Access Level: 10/A/AA</p>
+  <p>Project Status: LOCKED</p>
 
-  <p>Project Status: REDACTED.</p>
+  <div id="apex-lock">
+    <p>Enter Authorization Code:</p>
+    <input type="password" id="codeInput">
+    <button onclick="checkCode()">ACCESS</button>
+  </div>
 
-  <p>Enter Passcode: _____________</p>
+  <div id="apex-unlocked" style="display:none;">
+    <p>✔ ACCESS GRANTED</p>
+    <p>Project Status: UNLOCKED</p>
+    <p>Data stream initializing...</p>
+    <p>████████████████████</p>
+  </div>
 
 </div>
 </div>
@@ -285,9 +298,21 @@ function openWindow(id) {
   windows.forEach(window => {
     window.style.display = "none";
   });
+
   document.getElementById(id).style.display = "block";
+
+  if (id === "apex") {
+  const unlocked = getComputedStyle(
+    document.getElementById("apex-unlocked")
+  ).display === "block";
+
+  if (!unlocked) {
+    document.getElementById("apex-lock").style.display = "block";
+    document.getElementById("codeInput").value = "";
+  }
 }
-  typeWriter();
+}
+
 </script>
 </body>
 </html>
