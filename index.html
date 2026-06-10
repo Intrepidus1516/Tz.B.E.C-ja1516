@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>TEC SYSTEM BOOT</title>
-
 <style>
+
+.window {
+display: none;
+margin-top: 20px;
+border: 1px solid #39ff14;
+padding: 15px;
+}
+
+.title {
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.app {
+cursor: pointer;
+margin: 10px 0;
+padding: 10px;
+border: 1px solid #39ff14;
+}
+
+.app:hover {
+background: #39ff14;
+color: black;
+}
+  
 body {
   margin: 0;
   background: black;
   color: #39ff14;
-  font-family: monospace;
-  overflow: hidden;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  line-height: 1.8;
+  overflow-y: auto;
 }
 
-/* CRT scanlines */
+/* CRT Scanlines */
 body::before {
   content: "";
   position: fixed;
@@ -28,11 +55,18 @@ body::before {
   pointer-events: none;
 }
 
-/* flicker */
+/* Screen Flicker */
 @keyframes flicker {
   0% { opacity: 0.92; }
   50% { opacity: 1; }
   100% { opacity: 0.88; }
+}
+
+/* Cursor Blink */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .screen {
@@ -41,19 +75,26 @@ body::before {
 }
 
 .glow {
-  text-shadow: 0 0 6px #39ff14;
+  text-shadow:
+    0 0 5px #39ff14,
+    0 0 10px #39ff14,
+    0 0 20px #39ff14;
+}
+
+#cursor {
+  animation: blink 1s infinite;
 }
 
 #menu {
   display: none;
   margin-top: 30px;
 }
-
+ 
 a {
   display: block;
-  width: 260px;
-  padding: 10px;
-  margin: 8px 0;
+  width: 320px;
+  padding: 12px;
+  margin: 12px 0;
   border: 1px solid #39ff14;
   color: #39ff14;
   text-decoration: none;
@@ -63,58 +104,175 @@ a:hover {
   background: #39ff14;
   color: black;
 }
+
 </style>
 </head>
-
 <body>
-
 <div class="screen">
-
-<h2 class="glow">TEC SYSTEM BOOT SEQUENCE</h2>
-
+<h2 class="glow">
+TEC DATABASE NODE // CLEARANCE REQUIRED
+</h2>
 <pre id="output"></pre>
-
+<span id="cursor">█</span>
 <div id="menu">
   <h3 class="glow">SYSTEM ONLINE</h3>
-  <a href="overview.html">DATABASE OVERVIEW</a>
-  <a href="security.html">SECURITY LOGS</a>
-  <a href="entities.html">ENTITY INDEX</a>
-  <a href="files/tz001.html">FILE: TZ-001</a>
-  <a href="files/tz014.html">FILE: TZ-014</a>
-  <a href="files/deep-log.html">DEEP ACCESS LOG</a>
+
+<div class="app" onclick="openWindow('overview')">
+  DATABASE OVERVIEW
 </div>
+
+<div class="app" onclick="openWindow('levels')">
+  LEVEL INDEX
+</div>
+
+<div class="app" onclick="openWindow('entities')">
+  ENTITY INDEX
+</div>
+
+<div class="app" onclick="openWindow('tz056')">
+  FILE: TZ-056
+</div>
+
+<div class="app" onclick="openWindow('tz014')">
+  FILE: TZ-014
+</div>
+
+<div class="app" onclick="openWindow('apex')">
+  PROJECT: APEX
+</div> 
+  
+<div id="overview" class="window">
+
+  <div class="title">
+    DATABASE OVERVIEW
+  </div>
+
+  <p>Welcome to the TEC Database.</p>
+
+  <p>Accessible records: 6</p>
+
+  <p>Database integrity: 98%</p>
 
 </div>
 
+<div id="levels" class="window">
+
+  <div class="title">
+    LEVEL INDEX
+  </div>
+
+  <p>Level 0 - Lobby</p>
+
+  <p>Level 1 - Habitable Zone</p>
+
+  <p>Level 2 - Pipe Dreams</p>
+
+  <p>Additional entries pending.</p>
+
+</div>
+
+<div id="entities" class="window">
+
+  <div class="title">
+    ENTITY INDEX
+  </div>
+
+  <p>Entity Catalog Available.</p>
+
+  <p>Records classified by threat level.</p>
+
+  <p>Use caution when reviewing files.</p>
+
+</div>
+
+<div id="tz056" class="window">
+
+  <div class="title">
+    FILE: TZ-056
+  </div>
+
+  <p>Status: UNDER INVESTIGATION</p>
+
+  <p>Clearance Level Required: 4</p>
+
+  <p>Notes: Data partially corrupted.</p>
+
+</div>
+
+<div id="tz014" class="window">
+
+  <div class="title">
+    FILE: TZ-014
+  </div>
+
+  <p>Status: ACTIVE</p>
+
+  <p>Clearance Level Required: 2</p>
+
+  <p>Notes: Structure exhibits abnormal behavior.</p>
+
+</div>
+
+<div id="apex" class="window">
+
+  <div class="title">
+    PROJECT: APEX
+  </div>
+
+  <p>Classification: RESTRICTED</p>
+
+  <p>Access Level: 10/A/AA</p>
+
+  <p>Project status unknown.</p>
+
+</div>
+</div>
 <script>
 const lines = [
   "Initializing TEC core systems...",
   "Loading encryption layer [OK]",
   "Mounting database nodes...",
   "Checking security clearance...",
-  "WARNING: Minor instability in deep layer",
+  "WARNING: Minor instability in file storage",
   "Calibrating interface...",
   "Establishing connection to TZPSS network...",
   "System integrity: 98%",
+  "Downloading Encryption Key...",
+  "Code: 9k256m20s1516",
   "Finalizing boot sequence...",
-  "ACCESS GRANTED"
+  "ACCESS GRANTED",
+  "CLEARANCE LEVEL: 10/A/AA",
+  "WELCOME OPERATIVE"
 ];
-
-let i = 0;
-let output = document.getElementById("output");
-
-function typeLine() {
-  if (i < lines.length) {
-    output.innerHTML += lines[i] + "\n";
-    i++;
-    setTimeout(typeLine, 700); // speed of boot text
-  } else {
+let lineIndex = 0;
+let charIndex = 0;
+const output = document.getElementById("output");
+function typeWriter() {
+  if (lineIndex >= lines.length) {
     document.getElementById("menu").style.display = "block";
+    openWindow("overview");
+    return;
+  }
+  const currentLine = lines[lineIndex];
+  if (charIndex < currentLine.length) {
+    output.textContent += currentLine.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeWriter, 35);
+  } else {
+    output.textContent += "\n";
+    lineIndex++;
+    charIndex = 0;
+    setTimeout(typeWriter, 400);
   }
 }
-
-typeLine();
+function openWindow(id) {
+  const windows = document.querySelectorAll(".window");
+  windows.forEach(window => {
+    window.style.display = "none";
+  });
+  document.getElementById(id).style.display = "block";
+}
+  typeWriter();
 </script>
-
 </body>
 </html>
