@@ -77,8 +77,7 @@ body::before {
 .glow {
   text-shadow:
     0 0 4px #39ff14,
-    0 0 8px #39ff14,
-    0 0 18px #39ff14;
+    0 0 6px #39ff14;
 }
 
 #cursor {
@@ -118,27 +117,27 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
   <h3 class="glow">SYSTEM ONLINE</h3>
 
 <div class="app" onclick="openWindow('overview')">
-  DATABASE OVERVIEW
+  [DIR] DATABASE OVERVIEW
 </div>
 
 <div class="app" onclick="openWindow('levels')">
-  LEVEL INDEX
+  [DIR] LEVEL INDEX
 </div>
 
 <div class="app" onclick="openWindow('entities')">
-  ENTITY INDEX
+  [DIR] ENTITY INDEX
 </div>
 
 <div class="app" onclick="openWindow('tz056')">
-  FILE: TZ-056
+  [FILE] FILE: TZ-056
 </div>
 
 <div class="app" onclick="openWindow('tz014')">
-  FILE: TZ-014
+  [FILE] FILE: TZ-014
 </div>
 
 <div class="app" onclick="openWindow('apex')">
-  PROJECT: APEX
+  [LOCKED] PROJECT: APEX
 </div> 
   
 <div id="overview" class="window">
@@ -161,13 +160,25 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
     LEVEL INDEX
   </div>
 
-  <p>Level 0 - Lobby</p>
+  <p>Level 0 - The Threshold</p>
 
-  <p>Level 1 - Habitable Zone</p>
+  <p>Level 1 - Parking Garage</p>
 
-  <p>Level 2 - Pipe Dreams</p>
+  <p>Level 2 - Pipelines</p>
 
-  <p>Additional entries pending.</p>
+  <p>Level 3 - Electrical Station</p>
+
+  <p>Level 4 - Infinite Office</p>
+
+  <p>Level 5 - Terror Hotel</p>
+
+  <p>Level 6 - Vanta Death</p>
+
+  <p>Level 7 - Infinite Ocean</p>
+
+  <p>Level 8 - Cave System</p>
+
+  <p>Level 9 - Midnight Suburbs</p>
 
 </div>
 
@@ -191,7 +202,7 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
     FILE: TZ-056
   </div>
 
-  <p>Status: UNDER INVESTIGATION</p>
+  <p>Status: ACTIVE</p>
 
   <p>Clearance Level Required: 4</p>
 
@@ -205,11 +216,11 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
     FILE: TZ-014
   </div>
 
-  <p>Status: ACTIVE</p>
+  <p>Status: INACTIVE</p>
 
   <p>Clearance Level Required: 2</p>
 
-  <p>Notes: Structure exhibits abnormal behavior.</p>
+  <p>Notes: ████████████████████.</p>
 
 </div>
 
@@ -223,7 +234,9 @@ TEC DATABASE NODE // CLEARANCE REQUIRED
 
   <p>Access Level: 10/A/AA</p>
 
-  <p>Project status unknown.</p>
+  <p>Project Status: REDACTED.</p>
+
+  <p>Enter Passcode: _____________</p>
 
 </div>
 </div>
@@ -242,7 +255,9 @@ const lines = [
   "Finalizing boot sequence...",
   "ACCESS GRANTED",
   "CLEARANCE LEVEL: 10/A/AA",
-  "WELCOME OPERATIVE"
+  "WELCOME OPERATIVE",
+  "156 files hidden...",
+  "Awaiting Authorization Code..."
 ];
 let lineIndex = 0;
 let charIndex = 0;
