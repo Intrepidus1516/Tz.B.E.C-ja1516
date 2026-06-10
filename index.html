@@ -1,35 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>TEC SYSTEM BOOT</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 <style>
-
-.window {
-display: none;
-margin-top: 20px;
-border: 1px solid #39ff14;
-padding: 15px;
-}
-
-.title {
-font-weight: bold;
-margin-bottom: 10px;
-}
-
-.app {
-cursor: pointer;
-margin: 10px 0;
-padding: 10px;
-border: 1px solid #39ff14;
-}
-
-.app:hover {
-background: #39ff14;
-color: black;
-}
-  
 body {
   margin: 0;
   background: black;
@@ -40,7 +17,7 @@ body {
   overflow-y: auto;
 }
 
-/* CRT Scanlines */
+/* CRT scanlines */
 body::before {
   content: "";
   position: fixed;
@@ -55,18 +32,16 @@ body::before {
   pointer-events: none;
 }
 
-/* Screen Flicker */
+/* flicker */
 @keyframes flicker {
   0% { opacity: 0.92; }
   50% { opacity: 1; }
   100% { opacity: 0.88; }
 }
 
-/* Cursor Blink */
+/* cursor blink */
 @keyframes blink {
-  50% {
-    opacity: 0;
-  }
+  50% { opacity: 0; }
 }
 
 .screen {
@@ -75,9 +50,7 @@ body::before {
 }
 
 .glow {
-  text-shadow:
-    0 0 4px #39ff14,
-    0 0 6px #39ff14;
+  text-shadow: 0 0 3px #39ff14;
 }
 
 #cursor {
@@ -89,170 +62,119 @@ body::before {
 #menu {
   display: none;
   margin-top: 30px;
-  animation: flicker 0.4s linear;
-}
- 
-a {
-  display: block;
-  width: 320px;
-  padding: 12px;
-  margin: 12px 0;
-  border: 1px solid #39ff14;
-  color: #39ff14;
-  text-decoration: none;
 }
 
-a:hover {
+/* apps */
+.app {
+  cursor: pointer;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #39ff14;
+}
+
+.app:hover {
   background: #39ff14;
   color: black;
 }
 
+/* windows */
+.window {
+  display: none;
+  margin-top: 20px;
+  border: 1px solid #39ff14;
+  padding: 15px;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 </style>
 </head>
+
 <body>
 <div class="screen">
-<h2 class="glow">
-TEC DATABASE NODE // CLEARANCE REQUIRED
-</h2>
+
+<h2 class="glow">TEC DATABASE NODE // CLEARANCE REQUIRED</h2>
+
 <pre id="output"></pre>
 <span id="cursor">█</span>
 
 <div id="menu">
   <h3 class="glow">SYSTEM ONLINE</h3>
 
-<div class="app" onclick="openWindow('overview')">
-  [DIR] DATABASE OVERVIEW
-</div>
+  <div class="app" onclick="openWindow('overview')">[DIR] DATABASE OVERVIEW</div>
+  <div class="app" onclick="openWindow('levels')">[DIR] LEVEL INDEX</div>
+  <div class="app" onclick="openWindow('entities')">[DIR] ENTITY INDEX</div>
+  <div class="app" onclick="openWindow('tz056')">[FILE] TZ-056</div>
+  <div class="app" onclick="openWindow('tz014')">[FILE] TZ-014</div>
+  <div class="app" onclick="openWindow('apex')">[LOCKED] PROJECT: APEX</div>
 
-<div class="app" onclick="openWindow('levels')">
-  [DIR] LEVEL INDEX
-</div>
-
-<div class="app" onclick="openWindow('entities')">
-  [DIR] ENTITY INDEX
-</div>
-
-<div class="app" onclick="openWindow('tz056')">
-  [FILE] FILE: TZ-056
-</div>
-
-<div class="app" onclick="openWindow('tz014')">
-  [FILE] FILE: TZ-014
-</div>
-
-<div class="app" onclick="openWindow('apex')">
-  [LOCKED] PROJECT: APEX
-</div> 
-  
-<div id="overview" class="window">
-
-  <div class="title">
-    DATABASE OVERVIEW
+  <div id="overview" class="window">
+    <div class="title">DATABASE OVERVIEW</div>
+    <p>Welcome to the TEC Database.</p>
+    <p>Accessible records: 6</p>
+    <p>Database integrity: 98%</p>
   </div>
 
-  <p>Welcome to the TEC Database.</p>
-
-  <p>Accessible records: 6</p>
-
-  <p>Database integrity: 98%</p>
-
-</div>
-
-<div id="levels" class="window">
-
-  <div class="title">
-    LEVEL INDEX
+  <div id="levels" class="window">
+    <div class="title">LEVEL INDEX</div>
+    <p>Level 0 - The Threshold</p>
+    <p>Level 1 - Parking Garage</p>
+    <p>Level 2 - Pipelines</p>
+    <p>Level 3 - Electrical Station</p>
+    <p>Level 4 - Infinite Office</p>
+    <p>Level 5 - Terror Hotel</p>
+    <p>Level 6 - Vanta Death</p>
+    <p>Level 7 - Infinite Ocean</p>
+    <p>Level 8 - Cave System</p>
+    <p>Level 9 - Midnight Suburbs</p>
   </div>
 
-  <p>Level 0 - The Threshold</p>
-
-  <p>Level 1 - Parking Garage</p>
-
-  <p>Level 2 - Pipelines</p>
-
-  <p>Level 3 - Electrical Station</p>
-
-  <p>Level 4 - Infinite Office</p>
-
-  <p>Level 5 - Terror Hotel</p>
-
-  <p>Level 6 - Vanta Death</p>
-
-  <p>Level 7 - Infinite Ocean</p>
-
-  <p>Level 8 - Cave System</p>
-
-  <p>Level 9 - Midnight Suburbs</p>
-
-</div>
-
-<div id="entities" class="window">
-
-  <div class="title">
-    ENTITY INDEX
+  <div id="entities" class="window">
+    <div class="title">ENTITY INDEX</div>
+    <p>Entity Catalog Available.</p>
+    <p>Records classified by threat level.</p>
   </div>
 
-  <p>Entity Catalog Available.</p>
-
-  <p>Records classified by threat level.</p>
-
-  <p>Use caution when reviewing files.</p>
-
-</div>
-
-<div id="tz056" class="window">
-
-  <div class="title">
-    FILE: TZ-056
+  <div id="tz056" class="window">
+    <div class="title">FILE: TZ-056</div>
+    <p>Status: ACTIVE</p>
+    <p>Clearance Level Required: 5</p>
+    <p>Notes: Data partially corrupted.</p>
   </div>
 
-  <p>Status: ACTIVE</p>
-
-  <p>Clearance Level Required: 5</p>
-
-  <p>Notes: Data partially corrupted.</p>
-
-</div>
-
-<div id="tz014" class="window">
-
-  <div class="title">
-    FILE: TZ-014
+  <div id="tz014" class="window">
+    <div class="title">FILE: TZ-014</div>
+    <p>Status: INACTIVE</p>
+    <p>Clearance Level Required: 8</p>
+    <p>Notes: ████████████████████.</p>
   </div>
 
-  <p>Status: INACTIVE</p>
+  <div id="apex" class="window">
+    <div class="title">PROJECT: APEX</div>
 
-  <p>Clearance Level Required: 8</p>
+    <p>Classification: RESTRICTED</p>
+    <p>Access Level: 10/A/AA</p>
+    <p>Project Status: LOCKED</p>
 
-  <p>Notes: ████████████████████.</p>
+    <div id="apex-lock">
+      <p>Enter Authorization Code:</p>
+      <input type="password" id="codeInput">
+      <button onclick="checkCode()">ACCESS</button>
+    </div>
 
-</div>
-
-<div id="apex" class="window">
-
-  <div class="title">
-    PROJECT: APEX
-  </div>
-
-  <p>Classification: RESTRICTED</p>
-  <p>Access Level: 10/A/AA</p>
-  <p>Project Status: LOCKED</p>
-
-  <div id="apex-lock">
-    <p>Enter Authorization Code:</p>
-    <input type="password" id="codeInput">
-    <button onclick="checkCode()">ACCESS</button>
-  </div>
-
-  <div id="apex-unlocked" style="display:none;">
-    <p>✔ ACCESS GRANTED</p>
-    <p>Project Status: UNLOCKED</p>
-    <p>Data stream initializing...</p>
-    <p>████████████████████</p>
+    <div id="apex-unlocked" style="display:none;">
+      <p>✔ ACCESS GRANTED</p>
+      <p>Project Status: UNLOCKED</p>
+      <p>Data stream initializing...</p>
+      <p>████████████████████</p>
+    </div>
   </div>
 
 </div>
 </div>
+
 <script>
 const lines = [
   "Initializing TEC core systems...",
@@ -272,18 +194,23 @@ const lines = [
   "156 files hidden...",
   "Awaiting Authorization Code..."
 ];
+
 let lineIndex = 0;
 let charIndex = 0;
+
 const output = document.getElementById("output");
+
 function typeWriter() {
   if (lineIndex >= lines.length) {
     document.getElementById("menu").style.display = "block";
     openWindow("overview");
     return;
   }
-  const currentLine = lines[lineIndex];
-  if (charIndex < currentLine.length) {
-    output.textContent += currentLine.charAt(charIndex);
+
+  const line = lines[lineIndex];
+
+  if (charIndex < line.length) {
+    output.textContent += line.charAt(charIndex);
     charIndex++;
     setTimeout(typeWriter, 35);
   } else {
@@ -293,26 +220,35 @@ function typeWriter() {
     setTimeout(typeWriter, 400);
   }
 }
+
 function openWindow(id) {
-  const windows = document.querySelectorAll(".window");
-  windows.forEach(window => {
-    window.style.display = "none";
+  document.querySelectorAll(".window").forEach(w => {
+    w.style.display = "none";
   });
 
-  document.getElementById(id).style.display = "block";
+  const el = document.getElementById(id);
+  if (el) el.style.display = "block";
 
   if (id === "apex") {
-  const unlocked = getComputedStyle(
-    document.getElementById("apex-unlocked")
-  ).display === "block";
-
-  if (!unlocked) {
     document.getElementById("apex-lock").style.display = "block";
+    document.getElementById("apex-unlocked").style.display = "none";
     document.getElementById("codeInput").value = "";
   }
 }
+
+function checkCode() {
+  const code = document.getElementById("codeInput").value;
+
+  if (code === "9k256m20s1516") {
+    document.getElementById("apex-unlocked").style.display = "block";
+    document.getElementById("apex-lock").style.display = "none";
+  } else {
+    alert("ACCESS DENIED");
+  }
 }
 
+typeWriter();
 </script>
+
 </body>
 </html>
