@@ -31,7 +31,66 @@ body::before {
   );
   pointer-events: none;
 }
+  
+body.red-alert {
+  animation: flicker 0.08s infinite;
+  filter: contrast(1.2);
+}
+body.red-alert {
+  color: #ff2b2b;
+  background: black;
+}
 
+body.red-alert .glow {
+  text-shadow: 0 0 4px #ff2b2b;
+}
+
+body.red-alert .app {
+  border: 1px solid #ff2b2b;
+  color: #ff2b2b;
+}
+
+body.red-alert .app:hover {
+  background: #ff2b2b;
+  color: black;
+}
+
+body.red-alert .window {
+  border: 1px solid #ff2b2b;
+}
+
+body.red-alert #apex-lock input,
+body.red-alert #apex-lock button {
+  border: 1px solid #ff2b2b;
+  color: #ff2b2b;
+}
+
+body.red-alert #apex-lock button:hover {
+  background: #ff2b2b;
+  color: black;
+}
+
+body.red-alert #cursor {
+  text-shadow: 0 0 6px #ff2b2b;
+}
+  body.red-alert {
+  animation: flicker 0.05s infinite;
+}
+  body.red-alert #cursor {
+  color: #ff2b2b;
+}
+  body.red-alert #cursor {
+  animation: blink 1s infinite;
+}
+  #apex-lock input:focus {
+  outline: none;
+  box-shadow: 0 0 6px #39ff14;
+}
+
+body.red-alert #apex-lock input:focus {
+  box-shadow: 0 0 6px #ff2b2b;
+}
+  
 /* flicker */
 @keyframes flicker {
   0% { opacity: 0.92; }
@@ -63,7 +122,33 @@ body::before {
   display: none;
   margin-top: 30px;
 }
+  
+#apex-lock input {
+  background: black;
+  color: #39ff14;
+  border: 1px solid #39ff14;
+  padding: 8px;
+  font-family: 'Press Start 2P', monospace;
+  outline: none;
+}
 
+#apex-lock button {
+  background: black;
+  color: #39ff14;
+  border: 1px solid #39ff14;
+  padding: 8px;
+  font-family: 'Press Start 2P', monospace;
+  cursor: pointer;
+}
+
+#apex-lock button:hover {
+  background: #39ff14;
+  color: black;
+}
+  #apex-lock button:active {
+  transform: scale(0.95);
+}
+  
 /* apps */
 .app {
   cursor: pointer;
@@ -119,16 +204,19 @@ body::before {
 
   <div id="levels" class="window">
     <div class="title">LEVEL INDEX</div>
-    <p>Level 0 - The Threshold</p>
-    <p>Level 1 - Parking Garage</p>
-    <p>Level 2 - Pipelines</p>
-    <p>Level 3 - Electrical Station</p>
-    <p>Level 4 - Infinite Office</p>
-    <p>Level 5 - Terror Hotel</p>
-    <p>Level 6 - Vanta Death</p>
-    <p>Level 7 - Infinite Ocean</p>
-    <p>Level 8 - Cave System</p>
-    <p>Level 9 - Midnight Suburbs</p>
+    <p>Level 0 - The Threshold - Class B</p>
+    <p>Level 1 - Parking Garage - Class B</p>
+    <p>Level 2 - Pipelines - Class D</p>
+    <p>Level 3 - Electrical Station - Class D</p>
+    <p>Level 4 - Infinite Office - Class A</p>
+    <p>Level 5 - Terror Hotel - Class D/E</p>
+    <p>Level 6 - Vanta Death - Class E</p>
+    <p>Level 7 - Infinite Ocean - Class E</p>
+    <p>Level 8 - Cave System - Class F</p>
+    <p>Level 9 - Midnight Suburbs - Class C/D</p>
+    <p>Level 10 - Wheat Fields - Class A</p>
+    <p>Level 11 - Endless City - Class A</p>
+    <p>Level 11.2 - Vast Subway - Class B</p>
   </div>
 
   <div id="entities" class="window">
@@ -242,6 +330,10 @@ function checkCode() {
   if (code === "9k256m20s1516") {
     document.getElementById("apex-unlocked").style.display = "block";
     document.getElementById("apex-lock").style.display = "none";
+
+    // 🔴 ENTER RED ALERT MODE
+    document.body.classList.add("red-alert");
+
   } else {
     alert("ACCESS DENIED");
   }
