@@ -16,6 +16,33 @@ body {
   line-height: 1.8;
   overflow-y: auto;
 }
+  #apex-dossier {
+  border: 1px solid #ff2b2b;
+  text-shadow: 0 0 4px #ff2b2b;
+}
+
+#terminal {
+  color: #ff2b2b;
+  margin-top: 10px;
+}
+
+.redacted {
+  background: black;
+  border: 1px solid #ff2b2b;
+  color: black;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.redacted.revealed {
+  color: #ff2b2b;
+  background: transparent;
+}
+
+#decryptLog {
+  white-space: pre-line;
+  color: #39ff14;
+}
 
 /* CRT scanlines */
 body::before {
@@ -289,6 +316,38 @@ body.red-alert #apex-lock input:focus {
       <p>Data stream initializing...</p>
       <p>████████████████████</p>
     </div>
+    <div id="apex-dossier" class="window">
+  <div class="title">CLASSIFIED DOSSIER // APEX</div>
+
+  <div id="decryptLog"></div>
+
+  <br>
+
+  <div id="terminal">
+    > INITIALIZING SECURE CHANNEL...
+    <br>
+    > LINK ESTABLISHED
+    <br>
+    > RUNNING TRACE...
+  </div>
+
+  <br>
+
+  <p>
+    SUBJECT STATUS: 
+    <span class="redacted" onclick="reveal(this)">[REDACTED]</span>
+  </p>
+
+  <p>
+    ORIGIN FILE:
+    <span class="redacted" onclick="reveal(this)">[REDACTED]</span>
+  </p>
+
+  <p>
+    CONTAINMENT LEVEL: 
+    <span class="redacted" onclick="reveal(this)">UNKNOWN ENTITY</span>
+  </p>
+</div>
   </div>
 
 </div>
@@ -370,6 +429,36 @@ function checkCode() {
 }
 
 typeWriter();
+  function startDecryption() {
+  const log = document.getElementById("decryptLog");
+
+  const lines = [
+    "Decrypting APEX archive...",
+    "Bypassing firewall layer 1...",
+    "Bypassing firewall layer 2...",
+    "Reconstructing corrupted data...",
+    "WARNING: SELF-MODIFYING FILE DETECTED",
+    "ACCESSING CORE NODE...",
+    "..."
+    "AA Grade Classification Granted",
+    "...",
+    "Due to internal restrictions, an alert has been sent to high command",
+    "Automatic file lockdown in...",
+    "_56 minutes_ and _ 11 seconds_"
+  ];
+
+  let i = 0;
+
+  const interval = setInterval(() => {
+    if (i >= lines.length) {
+      clearInterval(interval);
+      return;
+    }
+
+    log.textContent += lines[i] + "\n";
+    i++;
+  }, 700);
+}
 </script>
 
 </body>
